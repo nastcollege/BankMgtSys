@@ -33,6 +33,7 @@ if (!((session.getAttribute("role").toString()).equals("ADMIN"))) {
 			<th>#</th>
 			<th>Account Holder Name</th>
 			<th>Mobile Number</th>
+			<th>Status</th>
 			<th>Action?</th>
 		</tr>
 		<%
@@ -56,6 +57,7 @@ if (!((session.getAttribute("role").toString()).equals("ADMIN"))) {
 			<td><%=rs.getString("first_name")+ " "+rs.getString("last_name")%></td>
 			<td><%=rs.getString("account_number")%></td>
 			<td>Active</td>
+			<td><a href="pending_account_reject.jsp?account_id=<%=rs.getInt("account_id")%>">Reject</a></td>
 		</tr>
 		<%
 		}

@@ -42,4 +42,40 @@ public class BankAccount {
 		}
 		return requested;
 	}
+
+	public static int getBankAccountIdByAccountNumber(String accountNumber) {
+
+		try {
+			Connection conn = DbConnection.connect();
+			String sql="SELECT id FROM tbl_bank_accounts WHERE account_number=? AND status=?";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setString(1, accountNumber);
+			stmt.setInt(2, 1);
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next()) {
+				return rs.getInt("id");
+			}
+
+		}catch(Exception e) {
+			return 0;
+		}
+		return 0;
+	}
+
+
+	public static boolean updateBalance(int accountId, double balance){
+		boolean success=false;
+		try {
+			Connection conn = DbConnection.connect();
+			String sql="UPDATE tbl_bank_accounts SET balance=balance+? WHERE id=?";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setDouble(1, balance);
+			stmt.setInt(2, accountId);
+			success=stmt.executeUpdate()>0;
+
+		}catch(Exception e) {
+			success=false;
+		}
+		return success;
+	}
 }

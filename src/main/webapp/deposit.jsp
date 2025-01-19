@@ -26,10 +26,10 @@ if (!((session.getAttribute("role").toString()).equals("ADMIN"))) {
 
 	<form method="post" action="deposit_process.jsp">
 		<label>Account Number</label> <input type="number"
-			name="txt_account_number" /> <br /> <label>Deposit Amount</label> <input
-			type="number" name="txt_amount" /> <br /> <label>Depositor
-			Name</label> <input type="text" name="txt_depositor_name" /> <br /> <label>Depositor
-			Contact Number</label> <input type="text" name="txt_contact" /> <br />
+			name="txt_account_number" required/> <br /> <label>Deposit Amount</label> <input
+			type="number" name="txt_amount" required /> <br /> <label>Depositor
+			Name</label> <input type="text" name="txt_depositor_name" required /> <br /> <label>Depositor
+			Contact Number</label> <input type="text" name="txt_contact"  required/> <br />
 
 		<button type="submit">Deposit</button>
 
