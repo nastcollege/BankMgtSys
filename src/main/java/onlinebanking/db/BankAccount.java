@@ -43,6 +43,23 @@ public class BankAccount {
 		return requested;
 	}
 
+	public static int getAcountStatus(Long userId) {
+		int requested=-1;
+		try {
+			Connection conn = DbConnection.connect();
+			String sql="SELECT status FROM tbl_bank_accounts WHERE user_id=?";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setLong(1, userId);		
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next()) {
+				requested=rs.getInt("status");
+			}
+
+		}catch(Exception e) {
+			requested=-1;
+		}
+		return requested;
+	}
 	public static int getBankAccountIdByAccountNumber(String accountNumber) {
 
 		try {

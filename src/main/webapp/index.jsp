@@ -19,20 +19,22 @@ if (session.getAttribute("user") == null) {
 	<%
 	Long userId = Long.parseLong(session.getAttribute("userId").toString());
 
-	if (BankAccount.isAcountActive(userId)) {
-	%>
-	<jsp:include page="customer_menu.jsp"></jsp:include>
-	<%
-	} else if(BankAccount.isAcountRequested(userId)) {
-		out.print("Processing From Bank End....");
-	}else{
+	if (BankAccount.getAcountStatus(userId)==1) {
 		%>
-	<a href="request_bank_account.jsp">Request Bank Account</a>
-	<%
-
+		<jsp:include page="customer_menu.jsp"></jsp:include>
+		<%
+		} else if(BankAccount.getAcountStatus(userId)==0) {
+			out.print("Account Activation in Process From Bank End!");
+		}else if(BankAccount.getAcountStatus(userId)==2){
+			out.print("Your Account is Blocked!, Contact Bank Admin");
+		}else{
+			%>
+		<a href="request_bank_account.jsp">Request Bank Account</a>
+		<%
 }
 
 %>
+
 
 </body>
 </html>
